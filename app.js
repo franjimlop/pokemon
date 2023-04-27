@@ -36,11 +36,11 @@ obtenerPokemon().then((pokemon) => {
     // Creamos una tarjeta para cada Pokemon
     pokemon.map((item) => {
         const cardItem = document.createElement('div');
-        cardItem.classList.add('col', 'col-md-3', 'col-sm-1');
+        cardItem.classList.add('col-12', 'col-md-6', 'col-lg-4', 'col-xl-3');
         cardItem.innerHTML = `
         <div class="card">
-        <h2>${item.name}</h2>
-        <img src="${item.sprites.front_default}">
+        <h1>${item.name.charAt(0).toUpperCase() + item.name.slice(1)}</h1>
+        <img class="bg-light my-3" src="${item.sprites.front_default}">
         <p>ID: ${item.id}</p>
         <p>Tipo: ${item.types.map(type => type.type.name).join(", ")}</p>
         <p>Altura: ${item.height / 10} m</p>

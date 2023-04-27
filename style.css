@@ -1,38 +1,40 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+nav {
+    background-color: rgb(255, 208, 0);
+    text-align: center;
 }
 
-.pokemon {
-    margin: auto !important;
+nav img {
+    width: 150px;
+}
+
+.logoPokemon {
+    margin: auto;
 }
 
 body {
-    text-align: center !important;
-    margin: 30px;
-    background-image: url("https://farm7.static.flickr.com/6145/5945241764_0d82078f53.jpg");
+    background-image: url("https://static.vecteezy.com/system/resources/thumbnails/014/022/441/small/water-pokemon-pattern-free-vector.jpg");
 }
 
 #resultados {
     display: flex;
     justify-content: center;
+    text-align: center;
     flex-wrap: wrap;
 }
 
 .card {
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
+    background-color: darkred;
+    color: white;
+    border: 1px solid black;
     border-radius: 5px;
-    box-shadow: 2px 2px 2px #ccc;
-    margin: 10px;
-    padding: 10px;
+    box-shadow: 2px 2px 2px black;
+    margin: 20px;
+    padding: 15px;
     width: 90%;
 }
 
-.card h2 {
-    font-size: 18px;
-    margin-bottom: 5px;
+.card h1 {
+    font-size: 25px;
 }
 
 .card p {
