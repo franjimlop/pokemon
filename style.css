@@ -1,10 +1,10 @@
 nav {
-    background-color: rgb(255, 208, 0);
+    background-color: gold;
     text-align: center;
 }
 
 nav img {
-    width: 150px;
+    width: 125px;
 }
 
 .logoPokemon {
@@ -46,4 +46,21 @@ body {
     text-align: right;
     padding-right: 10px;
     padding-top: 5px;
+    font-family: 'PokemonSolid', sans-serif;
+    color: gold;
+    letter-spacing: 0.1em;
+}
+
+@font-face {
+    font-family: 'PokemonSolid';
+    src: url('./fonts/PokemonSolid.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.nombrePokemon {
+    font-family: 'PokemonSolid', sans-serif;
+    color: gold;
+    letter-spacing: 0.1em;
+    -webkit-text-stroke: 1.5px rgb(0, 119, 255);
 }

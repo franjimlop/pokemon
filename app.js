@@ -28,6 +28,28 @@ async function obtenerPokemon() {
     return pokemon;
 }
 
+// Objeto que uso en obtenerPokemon() para enlazar los nombres de los tipos a las rutas de sus imágenes
+const tipoImagenes = {
+    normal: "img/normal.png",
+    fire: "img/fuego.png",
+    water: "img/agua.png",
+    electric: "img/electrico.png",
+    grass: "img/planta.png",
+    ice: "img/hielo.png",
+    fighting: "img/lucha.png",
+    poison: "img/veneno.png",
+    ground: "img/tierra.png",
+    flying: "img/volador.png",
+    psychic: "img/psiquico.png",
+    bug: "img/bicho.png",
+    rock: "img/roca.png",
+    ghost: "img/fantasma.png",
+    dragon: "img/dragon.png",
+    dark: "img/siniestro.png",
+    steel: "img/acero.png",
+    fairy: "img/hada.png",
+  };
+
 // Llamamos a la función y creamos nuestras tarjetas de Pokemon
 obtenerPokemon().then((pokemon) => {
     const resultados = document.querySelector("#resultados");
@@ -40,9 +62,9 @@ obtenerPokemon().then((pokemon) => {
         cardItem.innerHTML = `
         <div class="card">
         <p class="numPokedex">${item.id}</p>
-        <h1>${item.name.charAt(0).toUpperCase() + item.name.slice(1)}</h1>
-        <img class="my-3" src="${item.sprites.front_default}">
-        <p>Tipo: ${item.types.map(type => type.type.name).join(", ")}</p>
+        <h1 class="nombrePokemon">${item.name.charAt(0).toUpperCase() + item.name.slice(1)}</h1>
+        <img src="${item.sprites.front_default}">
+        <p>${item.types.map(type => `<img src="${tipoImagenes[type.type.name]}" alt="${type.type.name}">`).join(" ")}</p>
         <p>Altura: ${item.height / 10} m</p>
         <p>Peso: ${item.weight} kg</p>
         </div>`;
