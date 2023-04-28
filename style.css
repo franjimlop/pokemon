@@ -29,7 +29,7 @@ body {
     border-radius: 5px;
     box-shadow: 2px 2px 2px black;
     margin: 20px;
-    padding: 15px;
+    padding-bottom: 15px;
     width: 90%;
 }
 
@@ -39,4 +39,11 @@ body {
 
 .card p {
     font-size: 14px;
+}
+
+.numPokedex {
+    font-weight: bold;
+    text-align: right;
+    padding-right: 10px;
+    padding-top: 5px;
 }

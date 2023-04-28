@@ -39,9 +39,9 @@ obtenerPokemon().then((pokemon) => {
         cardItem.classList.add('col-12', 'col-md-6', 'col-lg-4', 'col-xl-3');
         cardItem.innerHTML = `
         <div class="card">
+        <p class="numPokedex">${item.id}</p>
         <h1>${item.name.charAt(0).toUpperCase() + item.name.slice(1)}</h1>
-        <img class="bg-light my-3" src="${item.sprites.front_default}">
-        <p>ID: ${item.id}</p>
+        <img class="my-3" src="${item.sprites.front_default}">
         <p>Tipo: ${item.types.map(type => type.type.name).join(", ")}</p>
         <p>Altura: ${item.height / 10} m</p>
         <p>Peso: ${item.weight} kg</p>
