@@ -24,17 +24,20 @@ body {
 
 .card {
     background-color: darkred;
-    color: white;
+    color: gold;
+    font-family: 'PokemonSolid', sans-serif;
     border: 1px solid black;
     border-radius: 5px;
     box-shadow: 2px 2px 2px black;
     margin: 20px;
     padding-bottom: 15px;
     width: 90%;
+    letter-spacing: 0.1em;
+    text-align: center;
 }
 
 .card h1 {
-    font-size: 25px;
+    font-size: 30px;
 }
 
 .card p {
@@ -42,13 +45,8 @@ body {
 }
 
 .numPokedex {
-    font-weight: bold;
-    text-align: right;
-    padding-right: 10px;
-    padding-top: 5px;
-    font-family: 'PokemonSolid', sans-serif;
-    color: gold;
-    letter-spacing: 0.1em;
+    padding: 3%;
+    margin: auto;
 }
 
 @font-face {
@@ -59,8 +57,13 @@ body {
 }
 
 .nombrePokemon {
-    font-family: 'PokemonSolid', sans-serif;
-    color: gold;
-    letter-spacing: 0.1em;
     -webkit-text-stroke: 1.5px rgb(0, 119, 255);
+    padding-top: 1%;
+}
+
+.imgTipo {
+    width: 66.67px;
+    height: 80px;
+    margin-left: 3%;
+    margin-right: 3%;
 }
