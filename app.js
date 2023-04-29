@@ -63,7 +63,7 @@ obtenerPokemon().then((pokemon) => {
         <div class="card">
         <h1 class="nombrePokemon">${item.name.charAt(0).toUpperCase() + item.name.slice(1)}</h1>
         <p class="numPokedex">${item.id}</p>
-        <img src="${item.sprites.front_default}">
+        <img src="${item.sprites.front_default || 'img/logo.png'}">
         <p>${item.types.map(type => `<img class="imgTipo" src="${tipoImagenes[type.type.name]}" alt="${type.type.name}">`).join(" ")}</p>
         <p>Altura: ${item.height / 10} m</p>
         <p>Peso: ${item.weight} kg</p>
@@ -108,7 +108,7 @@ const search = async () => {
             <div class="card">
             <h1 class="nombrePokemon">${item.name.charAt(0).toUpperCase() + item.name.slice(1)}</h1>
             <p class="numPokedex">${item.id}</p>
-            <img src="${item.sprites.front_default}">
+            <img src="${item.sprites.front_default || 'img/logo.png'}">
             <p>${item.types.map(type => `<img class="imgTipo" src="${tipoImagenes[type.type.name]}" alt="${type.type.name}">`).join(" ")}</p>
             <p>Altura: ${item.height / 10} m</p>
             <p>Peso: ${item.weight} kg</p>
@@ -127,7 +127,7 @@ const search = async () => {
                 <div class="card">
                 <h1 class="nombrePokemon">${item.name.charAt(0).toUpperCase() + item.name.slice(1)}</h1>
                 <p class="numPokedex">${item.id}</p>
-                <img src="${item.sprites.front_default}">
+                <img src="${item.sprites.front_default || 'img/logo.png'}">
                 <p>${item.types.map(type => `<img class="imgTipo" src="${tipoImagenes[type.type.name]}" alt="${type.type.name}">`).join(" ")}</p>
                 <p>Altura: ${item.height / 10} m</p>
                 <p>Peso: ${item.weight} kg</p>
