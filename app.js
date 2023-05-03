@@ -158,121 +158,53 @@ obtenerPokemonPorTipo().then((tipos) => {
             botonItem.innerHTML = `
             <button id="btn-${boton.name}" class="bg-${boton.name}">${boton.name.charAt(0).toUpperCase() + boton.name.slice(1)}</button>`;
             resultados.appendChild(botonItem);
+
+            const btnTipo = document.querySelector(`#btn-${boton.name}`);
+            btnTipo.addEventListener("click", () => {
+                filtrarPorTipo(boton.name);
+            });
         }
     });
 
     console.log(tipos);
-
-    const btnTipoNormal = document.querySelector("#btn-normal");
-    btnTipoNormal.addEventListener("click", () => {
-        filtrarPorTipo("normal");
-    });
-    const btnTipoFuego = document.querySelector("#btn-fire");
-    btnTipoNormal.addEventListener("click", () => {
-        filtrarPorTipo("fire");
-    });
-    const btnTipoAgua = document.querySelector("#btn-water");
-    btnTipoNormal.addEventListener("click", () => {
-        filtrarPorTipo("water");
-    });
-    const btnTipoElectrico = document.querySelector("#btn-electric");
-    btnTipoNormal.addEventListener("click", () => {
-        filtrarPorTipo("electrico");
-    });
-    const btnTipoPlanta = document.querySelector("#btn-grass");
-    btnTipoNormal.addEventListener("click", () => {
-        filtrarPorTipo("grass");
-    });
-    const btnTipoHielo = document.querySelector("#btn-ice");
-    btnTipoNormal.addEventListener("click", () => {
-        filtrarPorTipo("ice");
-    });
-    const btnTipoLucha = document.querySelector("#btn-fighting");
-    btnTipoNormal.addEventListener("click", () => {
-        filtrarPorTipo("fighting");
-    });
-    const btnTipoVeneno = document.querySelector("#btn-poison");
-    btnTipoNormal.addEventListener("click", () => {
-        filtrarPorTipo("poison");
-    });
-    const btnTipoTierra = document.querySelector("#btn-ground");
-    btnTipoNormal.addEventListener("click", () => {
-        filtrarPorTipo("ground");
-    });
-    const btnTipoVolador = document.querySelector("#btn-flying");
-    btnTipoNormal.addEventListener("click", () => {
-        filtrarPorTipo("flying");
-    });
-    const btnTipoPsiquico = document.querySelector("#btn-psychic");
-    btnTipoNormal.addEventListener("click", () => {
-        filtrarPorTipo("psychic");
-    });
-    const btnTipoBicho = document.querySelector("#btn-bug");
-    btnTipoNormal.addEventListener("click", () => {
-        filtrarPorTipo("bug");
-    });
-    const btnTipoRoca = document.querySelector("#btn-rock");
-    btnTipoNormal.addEventListener("click", () => {
-        filtrarPorTipo("rock");
-    });
-    const btnTipoFantasma = document.querySelector("#btn-ghost");
-    btnTipoNormal.addEventListener("click", () => {
-        filtrarPorTipo("ghost");
-    });
-    const btnTipoDragon = document.querySelector("#btn-dragon");
-    btnTipoNormal.addEventListener("click", () => {
-        filtrarPorTipo("dragon");
-    });
-    const btnTipoSiniestro = document.querySelector("#btn-dark");
-    btnTipoNormal.addEventListener("click", () => {
-        filtrarPorTipo("dark");
-    });
-    const btnTipoAcero = document.querySelector("#btn-steel");
-    btnTipoNormal.addEventListener("click", () => {
-        filtrarPorTipo("steel");
-    });
-    const btnTipoHada = document.querySelector("#btn-fairy");
-    btnTipoNormal.addEventListener("click", () => {
-        filtrarPorTipo("fairy");
-    });
-
-    function filtrarPorTipo(tipo) {
-        obtenerPokemon().then((pokemon) => {
-            const resultados = document.querySelector("#resultados");
-            resultados.innerHTML = "";
-
-            // Filtrar los Pokémon por tipo
-            const pokemonFiltrado = pokemon.filter((item) =>
-                item.types.some((type) => type.type.name === tipo)
-            );
-
-            // Mostrar los Pokémon filtrados en la pantalla
-            pokemonFiltrado.map((item) => {
-                const cardItem = document.createElement("div");
-                cardItem.classList.add(
-                    "col-12",
-                    "col-md-6",
-                    "col-lg-4",
-                    "col-xl-3"
-                );
-                cardItem.innerHTML = `
-                <div class="card">
-                <h1 class="nombrePokemon">${item.name.charAt(0).toUpperCase() + item.name.slice(1)
-                    }</h1>
-                <p class="numPokedex">${item.id}</p>
-                <img src="${item.sprites.front_default || "img/logo.png"
-                    }">
-                <p>${item.types
-                        .map(
-                            (type) =>
-                                `<img class="imgTipo" src="${tipoImagenes[type.type.name]}" alt="${type.type.name}">`
-                        )
-                        .join(" ")}</p>
-                <p>Altura: ${item.height / 10} m</p>
-                <p>Peso: ${item.weight} kg</p>
-                </div>`;
-                resultados.appendChild(cardItem);
-            });
-        });
-    }
 });
+
+function filtrarPorTipo(tipo) {
+    obtenerPokemon().then((pokemon) => {
+        const resultados = document.querySelector("#resultados");
+        resultados.innerHTML = "";
+
+        // Filtrar los Pokémon por tipo
+        const pokemonFiltrado = pokemon.filter((item) =>
+            item.types.some((type) => type.type.name === tipo)
+        );
+
+        // Mostrar los Pokémon filtrados en la pantalla
+        pokemonFiltrado.map((item) => {
+            const cardItem = document.createElement("div");
+            cardItem.classList.add(
+                "col-12",
+                "col-md-6",
+                "col-lg-4",
+                "col-xl-3"
+            );
+            cardItem.innerHTML = `
+            <div class="card">
+            <h1 class="nombrePokemon">${item.name.charAt(0).toUpperCase() + item.name.slice(1)
+                }</h1>
+            <p class="numPokedex">${item.id}</p>
+            <img src="${item.sprites.front_default || "img/logo.png"
+                }">
+            <p>${item.types
+                    .map(
+                        (type) =>
+                            `<img class="imgTipo" src="${tipoImagenes[type.type.name]}" alt="${type.type.name}">`
+                    )
+                    .join(" ")}</p>
+            <p>Altura: ${item.height / 10} m</p>
+            <p>Peso: ${item.weight} kg</p>
+            </div>`;
+            resultados.appendChild(cardItem);
+        });
+    });
+};
