@@ -156,7 +156,7 @@ obtenerPokemonPorTipo().then((tipos) => {
             const botonItem = document.createElement('div');
             botonItem.classList.add('col-2', 'd-inline-block', 'my-2');
             botonItem.innerHTML = `
-            <button id="btn-${boton.name}" class="bg-${boton.name}">${boton.name.charAt(0).toUpperCase() + boton.name.slice(1)}</button>`;
+            <button id="btn-${boton.name}" class="bg-${boton.name} cursor-personalizado">${boton.name.charAt(0).toUpperCase() + boton.name.slice(1)}</button>`;
             resultados.appendChild(botonItem);
 
             const btnTipo = document.querySelector(`#btn-${boton.name}`);

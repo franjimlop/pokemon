@@ -7,9 +7,14 @@ nav img {
     width: 125px;
 }
 
+.cursor-personalizado {
+    cursor: url(fonts/cursorSeleccion.cur), auto !important;
+}
+
 body {
     background-image: url("https://static.vecteezy.com/system/resources/thumbnails/014/022/441/small/water-pokemon-pattern-free-vector.jpg");
-    overflow-x: hidden
+    overflow-x: hidden;
+    cursor: url(fonts/cursor.cur), auto;
 }
 
 #resultados {
