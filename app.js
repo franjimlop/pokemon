@@ -223,9 +223,9 @@ obtenerPokemonPorTipo().then((tipos) => {
     btnTipoNormal.addEventListener("click", () => {
         filtrarPorTipo("dragon");
     });
-    const btnTipoSiniestro = document.querySelector("#btn-siniestro");
+    const btnTipoSiniestro = document.querySelector("#btn-dark");
     btnTipoNormal.addEventListener("click", () => {
-        filtrarPorTipo("siniestro");
+        filtrarPorTipo("dark");
     });
     const btnTipoAcero = document.querySelector("#btn-steel");
     btnTipoNormal.addEventListener("click", () => {
@@ -235,45 +235,44 @@ obtenerPokemonPorTipo().then((tipos) => {
     btnTipoNormal.addEventListener("click", () => {
         filtrarPorTipo("fairy");
     });
-});
 
-function filtrarPorTipo(tipo) {
-    obtenerPokemon().then((pokemon) => {
-        const resultados = document.querySelector("#resultados");
-        resultados.innerHTML = "";
+    function filtrarPorTipo(tipo) {
+        obtenerPokemon().then((pokemon) => {
+            const resultados = document.querySelector("#resultados");
+            resultados.innerHTML = "";
 
-        // Filtrar los Pokémon por tipo
-        const pokemonFiltrado = pokemon.filter((item) =>
-            item.types.some((type) => type.type.name === tipo)
-        );
-
-        // Mostrar los Pokémon filtrados en la pantalla
-        pokemonFiltrado.map((item) => {
-            const cardItem = document.createElement("div");
-            cardItem.classList.add(
-                "col-12",
-                "col-md-6",
-                "col-lg-4",
-                "col-xl-3"
+            // Filtrar los Pokémon por tipo
+            const pokemonFiltrado = pokemon.filter((item) =>
+                item.types.some((type) => type.type.name === tipo)
             );
-            cardItem.innerHTML = `
-          <div class="card">
-            <h1 class="nombrePokemon">${item.name.charAt(0).toUpperCase() + item.name.slice(1)
-                }</h1>
-            <p class="numPokedex">${item.id}</p>
-            <img src="${item.sprites.front_default || "img/logo.png"
-                }">
-            <p>${item.types
-                    .map(
-                        (type) =>
-                            `<img class="imgTipo" src="${tipoImagenes[type.type.name]}" alt="${type.type.name}">`
-                    )
-                    .join(" ")}</p>
-            <p>Altura: ${item.height / 10} m</p>
-            <p>Peso: ${item.weight} kg</p>
-          </div>
-        `;
-            resultados.appendChild(cardItem);
+
+            // Mostrar los Pokémon filtrados en la pantalla
+            pokemonFiltrado.map((item) => {
+                const cardItem = document.createElement("div");
+                cardItem.classList.add(
+                    "col-12",
+                    "col-md-6",
+                    "col-lg-4",
+                    "col-xl-3"
+                );
+                cardItem.innerHTML = `
+                <div class="card">
+                <h1 class="nombrePokemon">${item.name.charAt(0).toUpperCase() + item.name.slice(1)
+                    }</h1>
+                <p class="numPokedex">${item.id}</p>
+                <img src="${item.sprites.front_default || "img/logo.png"
+                    }">
+                <p>${item.types
+                        .map(
+                            (type) =>
+                                `<img class="imgTipo" src="${tipoImagenes[type.type.name]}" alt="${type.type.name}">`
+                        )
+                        .join(" ")}</p>
+                <p>Altura: ${item.height / 10} m</p>
+                <p>Peso: ${item.weight} kg</p>
+                </div>`;
+                resultados.appendChild(cardItem);
+            });
         });
-    });
-}
+    }
+});
