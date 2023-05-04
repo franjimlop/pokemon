@@ -1,23 +1,31 @@
+// Selecciona el div con id pantallaCarga
+const pantallaCarga = document.getElementById('pantallaCarga');
+
+// Función para mostrar la pantalla de carga
+function mostrarCarga() {
+    pantallaCarga.classList.remove('ocultar');
+    pantallaCarga.classList.add('mostrar');
+}
+
+// Función para ocultar la pantalla de carga
+function ocultarCarga() {
+    pantallaCarga.classList.remove('mostrar');
+    pantallaCarga.classList.add('ocultar');
+}
+
 // Constante que guarda la URL base de la PokeAPI
 const url = 'https://pokeapi.co/api/v2/';
 
 // Función que devuelve una promesa que se resuelve con todos los Pokemon
 async function obtenerPokemon() {
+    mostrarCarga();
     // Hacemos una solicitud para obtener la cantidad total de Pokemon
-    const response = await fetch(`${url}pokemon/`);
+    const response = await fetch(`${url}pokemon/?limit=1281&offset=0`);
     const data = await response.json();
-    const totalPokemon = data.count;
-
-    // Calculamos la cantidad de páginas necesarias para obtener todos los Pokemon
-    const paginas = Math.ceil(totalPokemon / 20);
 
     // Hacemos una solicitud para cada página y combinamos los resultados
     const resultados = [];
-    for (let i = 1; i <= paginas; i++) {
-        const response = await fetch(`${url}pokemon/?limit=20&offset=${(i - 1) * 20}`);
-        const data = await response.json();
-        resultados.push(...data.results);
-    }
+    resultados.push(...data.results);
 
     // Hacemos una solicitud para cada Pokemon para obtener su información completa
     const pokemon = await Promise.all(resultados.map(async (resultado) => {
@@ -71,6 +79,7 @@ obtenerPokemon().then((pokemon) => {
         //puedo añadir abilities y moves y poner todos los sprites
         resultados.appendChild(cardItem);
     });
+    ocultarCarga();
     console.log(pokemon);
 });
 
@@ -78,11 +87,11 @@ obtenerPokemon().then((pokemon) => {
 const search = async () => {
     // Obtener el valor del input de búsqueda
     const searchValue = document.querySelector('#buscador').value;
-
+    mostrarCarga();
     // Comprobar si se ha introducido algún valor
     if (searchValue) {
         // Variable que guarda la url de la pokeAPI para buscar pokemon
-        const url = `https://pokeapi.co/api/v2/pokemon/?limit=1118&offset=0`;
+        const url = `https://pokeapi.co/api/v2/pokemon/?limit=1281&offset=0`;
 
         // Hacemos una solicitud para obtener la lista completa de pokemon
         const response = await fetch(url);
@@ -136,6 +145,7 @@ const search = async () => {
             });
         });
     }
+    ocultarCarga();
 };
 
 async function obtenerPokemonPorTipo() {
@@ -172,11 +182,11 @@ obtenerPokemonPorTipo().then((tipos) => {
             });
         }
     });
-
     console.log(tipos);
 });
 
 function filtrarPorTipo(tipo) {
+    mostrarCarga();
     obtenerPokemon().then((pokemon) => {
         const resultados = document.querySelector("#resultados");
         resultados.innerHTML = "";
@@ -197,21 +207,15 @@ function filtrarPorTipo(tipo) {
             );
             cardItem.innerHTML = `
             <div class="card">
-            <h1 class="nombrePokemon">${item.name.charAt(0).toUpperCase() + item.name.slice(1)
-                }</h1>
+            <h1 class="nombrePokemon">${item.name.charAt(0).toUpperCase() + item.name.slice(1)}</h1>
             <p class="numPokedex">${item.id}</p>
-            <img src="${item.sprites.front_default || "img/logo.png"
-                }">
-            <p>${item.types
-                    .map(
-                        (type) =>
-                            `<img class="imgTipo" src="${tipoImagenes[type.type.name]}" alt="${type.type.name}">`
-                    )
-                    .join(" ")}</p>
+            <img src="${item.sprites.front_default || "img/logo.png"}">
+            <p>${item.types.map((type) => `<img class="imgTipo" src="${tipoImagenes[type.type.name]}" alt="${type.type.name}">`).join(" ")}</p>
             <p>Altura: ${item.height / 10} m</p>
             <p>Peso: ${item.weight} kg</p>
             </div>`;
             resultados.appendChild(cardItem);
         });
+        ocultarCarga();
     });
 };

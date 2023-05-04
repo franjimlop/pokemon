@@ -188,3 +188,13 @@ body {
     -webkit-text-stroke-color: black;
     font-weight: bold !important;
 }
+
+/* Clase que oculta el gif */
+.ocultar {
+    display: none !important;
+}
+
+/* Clase que muestra el gif */
+.mostrar {
+    display: block !important;
+}
