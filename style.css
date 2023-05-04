@@ -178,3 +178,13 @@ body {
     width: 90%;
     font-weight: bold;
 }
+
+.active {
+    background-image: url(/img/botonActivoFondo.png);
+    background-size: cover;
+    background-position: center center;
+    color: white;
+    -webkit-text-stroke-width: 1.5px;
+    -webkit-text-stroke-color: black;
+    font-weight: bold !important;
+}

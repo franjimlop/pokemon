@@ -115,7 +115,7 @@ const search = async () => {
             </div>`;
             resultados.appendChild(cardItem);
         });
-    } else {
+    } else if (searchValue === '') {
         // Si no se ha introducido ningún valor, mostrar todos los personajes de la página actual
         obtenerPokemon().then((pokemon) => {
             const resultados = document.querySelector("#resultados");
@@ -150,17 +150,24 @@ obtenerPokemonPorTipo().then((tipos) => {
     const resultados = document.querySelector("#filtroTipo");
     resultados.innerHTML = '';
 
+    let botonActivo = null;
+
     // Creamos un botón para cada tipo de Pokemon
     tipos.results.map((boton) => {
         if (boton.name !== "unknown" && boton.name !== "shadow") {
             const botonItem = document.createElement('div');
-            botonItem.classList.add('col-2', 'd-inline-block', 'my-2');
+            botonItem.classList.add('col-4', 'col-xl-2', 'd-inline-block', 'my-2');
             botonItem.innerHTML = `
             <button id="btn-${boton.name}" class="bg-${boton.name} cursor-personalizado">${boton.name.charAt(0).toUpperCase() + boton.name.slice(1)}</button>`;
             resultados.appendChild(botonItem);
 
             const btnTipo = document.querySelector(`#btn-${boton.name}`);
             btnTipo.addEventListener("click", () => {
+                if (botonActivo) {
+                    botonActivo.classList.remove("active");
+                }
+                btnTipo.classList.add("active");
+                botonActivo = btnTipo;
                 filtrarPorTipo(boton.name);
             });
         }

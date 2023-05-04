@@ -16,8 +16,7 @@
     <!--Cabecera de la página-->
     <nav>
         <div class="row d-flex justify-content-center align-items-center">
-            <div class="col-sm"><img class="logoPokemon py-3 cursor-personalizado" src="img/logo.png" alt="logo">
-            </div>
+            <div class="col-sm"><a href="index.html"><img class="logoPokemon py-3 cursor-personalizado" src="img/logo.png" alt="logo"></a></div>
             <div class="col-sm">
                 <form>
                     <input type="text" id="buscador" placeholder="Buscar pokemon..." onkeyup="search()" class="mb-2 cursor-personalizado">
@@ -28,6 +27,7 @@
     <!--Div que muestra los resultados de cada página (ver JS)-->
     <div class="container">
         <div id="filtroTipo"></div>
+        <div class="pantallaCarga"></div>
         <div id="resultados"></div>
     </div>
 
