@@ -13,6 +13,27 @@ function ocultarCarga() {
     pantallaCarga.classList.add('ocultar');
 }
 
+const tipoImagenes = {
+    normal: "img/normal.png",
+    fire: "img/fuego.png",
+    water: "img/agua.png",
+    electric: "img/electrico.png",
+    grass: "img/planta.png",
+    ice: "img/hielo.png",
+    fighting: "img/lucha.png",
+    poison: "img/veneno.png",
+    ground: "img/tierra.png",
+    flying: "img/volador.png",
+    psychic: "img/psiquico.png",
+    bug: "img/bicho.png",
+    rock: "img/roca.png",
+    ghost: "img/fantasma.png",
+    dragon: "img/dragon.png",
+    dark: "img/siniestro.png",
+    steel: "img/acero.png",
+    fairy: "img/hada.png",
+};
+
 // Constante que guarda la URL base de la PokeAPI
 const url = 'https://pokeapi.co/api/v2/';
 
@@ -44,20 +65,123 @@ obtenerMovimientos().then((movimiento) => {
     // Creamos una tarjeta para cada Movimiento
     movimiento.map((item) => {
         const nombreEspanol = item.names.find(name => name.language.name === 'es')?.name || '';
-        const nombre = nombreEspanol || item.names.find(name => name.language.name === 'en')?.name || '';
+        const nombre = nombreEspanol || item.names.find(name => name.language.name === 'en')?.name || '';   
 
-        const cardItem = document.createElement('div');
-        cardItem.classList.add('col-12', 'col-md-6', 'col-lg-4', 'col-xl-3');
-        cardItem.innerHTML = `
-        <div class="card">
-        <h1 class="nombrePokemon">${nombre.charAt(0).toUpperCase() + nombre.slice(1)}</h1>
-        <p>Tipo de daño: ${item.damage_class.name}</p>
-        <p>Precisión: ${item.accuracy}</p>
-        <p>Potencia: ${item.power}</p>
-        <p>PP: ${item.pp}</p>
-        </div>`;
-        // puedes añadir habilidades y movimientos y poner todos los sprites
-        resultados.appendChild(cardItem);
+        if (item.damage_class.name == "physical") {
+            if (item.power == null) {
+                if (item.accuracy == null) {
+                    const cardItem = document.createElement('div');
+                    cardItem.classList.add('col-12', 'col-md-6', 'col-lg-4', 'col-xl-3', 'cardAltura');
+                    cardItem.innerHTML = `
+                    <div class="cardMovimientos">
+                    <h1 class="nombrePokemon mb-4">${nombre.charAt(0).toUpperCase() + nombre.slice(1)}</h1>
+                    <p><img class="imgTipo" src="${tipoImagenes[item.type.name]}" alt="${item.type.name}"></p>
+                    <p>Ataque físico</p>
+                    <p>Precisión: Nunca falla</p>
+                    <p>Potencia: Variable o daño fijo</p>
+                    <p>PP: ${item.pp}</p>
+                    </div>`;
+                    resultados.appendChild(cardItem);
+                } else {
+                    const cardItem = document.createElement('div');
+                    cardItem.classList.add('col-12', 'col-md-6', 'col-lg-4', 'col-xl-3', 'cardAltura');
+                    cardItem.innerHTML = `
+                    <div class="cardMovimientos">
+                    <h1 class="nombrePokemon mb-4">${nombre.charAt(0).toUpperCase() + nombre.slice(1)}</h1>
+                    <p><img class="imgTipo" src="${tipoImagenes[item.type.name]}" alt="${item.type.name}"></p>
+                    <p>Ataque físico</p>
+                    <p>Precisión: ${item.accuracy}</p>
+                    <p>Potencia: Variable o daño fijo</p>
+                    <p>PP: ${item.pp}</p>
+                    </div>`;
+                    resultados.appendChild(cardItem);
+                }
+            } else {
+                const cardItem = document.createElement('div');
+                cardItem.classList.add('col-12', 'col-md-6', 'col-lg-4', 'col-xl-3', 'cardAltura');
+                cardItem.innerHTML = `
+                <div class="cardMovimientos">
+                <h1 class="nombrePokemon mb-4">${nombre.charAt(0).toUpperCase() + nombre.slice(1)}</h1>
+                <p><img class="imgTipo" src="${tipoImagenes[item.type.name]}" alt="${item.type.name}"></p>
+                <p>Ataque físico</p>
+                <p>Precisión: ${item.accuracy}</p>
+                <p>Potencia: ${item.power}</p>
+                <p>PP: ${item.pp}</p>
+                </div>`;
+                resultados.appendChild(cardItem);
+            }
+        }
+        if (item.damage_class.name == "special") {
+            if (item.power == null) {
+                if (item.accuracy == null) {
+                    const cardItem = document.createElement('div');
+                    cardItem.classList.add('col-12', 'col-md-6', 'col-lg-4', 'col-xl-3', 'cardAltura');
+                    cardItem.innerHTML = `
+                    <div class="cardMovimientos">
+                    <h1 class="nombrePokemon mb-4">${nombre.charAt(0).toUpperCase() + nombre.slice(1)}</h1>
+                    <p><img class="imgTipo" src="${tipoImagenes[item.type.name]}" alt="${item.type.name}"></p>
+                    <p>Ataque especial</p>
+                    <p>Precisión: Nunca falla</p>
+                    <p>Potencia: Variable o daño fijo</p>
+                    <p>PP: ${item.pp}</p>
+                    </div>`;
+                    resultados.appendChild(cardItem);
+                } else {
+                    const cardItem = document.createElement('div');
+                    cardItem.classList.add('col-12', 'col-md-6', 'col-lg-4', 'col-xl-3', 'cardAltura');
+                    cardItem.innerHTML = `
+                    <div class="cardMovimientos">
+                    <h1 class="nombrePokemon mb-4">${nombre.charAt(0).toUpperCase() + nombre.slice(1)}</h1>
+                    <p><img class="imgTipo" src="${tipoImagenes[item.type.name]}" alt="${item.type.name}"></p>
+                    <p>Ataque especial</p>
+                    <p>Precisión: ${item.accuracy}</p>
+                    <p>Potencia: Variable o daño fijo</p>
+                    <p>PP: ${item.pp}</p>
+                    </div>`;
+                    resultados.appendChild(cardItem);
+                }
+            } else {
+                const cardItem = document.createElement('div');
+                cardItem.classList.add('col-12', 'col-md-6', 'col-lg-4', 'col-xl-3', 'cardAltura');
+                cardItem.innerHTML = `
+                <div class="cardMovimientos">
+                <h1 class="nombrePokemon mb-4">${nombre.charAt(0).toUpperCase() + nombre.slice(1)}</h1>
+                <p><img class="imgTipo" src="${tipoImagenes[item.type.name]}" alt="${item.type.name}"></p>
+                <p>Ataque especial</p>
+                <p>Precisión: ${item.accuracy}</p>
+                <p>Potencia: ${item.power}</p>
+                <p>PP: ${item.pp}</p>
+                </div>`;
+                resultados.appendChild(cardItem);
+            }
+        }
+        if (item.damage_class.name == "status") {
+            if (item.accuracy == null) {
+                const cardItem = document.createElement('div');
+                cardItem.classList.add('col-12', 'col-md-6', 'col-lg-4', 'col-xl-3', 'cardAltura');
+                cardItem.innerHTML = `
+                <div class="cardMovimientos">
+                <h1 class="nombrePokemon mb-4">${nombre.charAt(0).toUpperCase() + nombre.slice(1)}</h1>
+                <p><img class="imgTipo" src="${tipoImagenes[item.type.name]}" alt="${item.type.name}"></p>
+                <p>Ataque de estado</p>
+                <p>Precisión: Nunca falla</p>
+                <p>PP: ${item.pp}</p>
+                </div>`;
+                resultados.appendChild(cardItem);
+            } else {
+                const cardItem = document.createElement('div');
+                cardItem.classList.add('col-12', 'col-md-6', 'col-lg-4', 'col-xl-3', 'cardAltura');
+                cardItem.innerHTML = `
+                <div class="cardMovimientos">
+                <h1 class="nombrePokemon m-4">${nombre.charAt(0).toUpperCase() + nombre.slice(1)}</h1>
+                <p><img class="imgTipo" src="${tipoImagenes[item.type.name]}" alt="${item.type.name}"></p>
+                <p>Ataque de estado</p>
+                <p>Precisión: ${item.accuracy}</p>
+                <p>PP: ${item.pp}</p>
+                </div>`;
+                resultados.appendChild(cardItem);
+            }
+        }
     });
 
     ocultarCarga();

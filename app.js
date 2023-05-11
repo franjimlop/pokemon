@@ -66,7 +66,7 @@ obtenerPokemon().then((pokemon) => {
     // Creamos una tarjeta para cada Pokemon
     pokemon.map((item) => {
         const cardItem = document.createElement('div');
-        cardItem.classList.add('col-12', 'col-md-6', 'col-lg-4', 'col-xl-3');
+        cardItem.classList.add('col-12', 'col-md-6', 'col-lg-4', 'col-xl-3', 'cardAltura');
         cardItem.innerHTML = `
         <div class="card">
         <h1 class="nombrePokemon">${item.name.charAt(0).toUpperCase() + item.name.slice(1)}</h1>
@@ -112,7 +112,7 @@ const search = async () => {
         // Creamos una tarjeta para cada Pokemon
         pokemon.map((item) => {
             const cardItem = document.createElement('div');
-            cardItem.classList.add('col-12', 'col-md-6', 'col-lg-4', 'col-xl-3');
+            cardItem.classList.add('col-12', 'col-md-6', 'col-lg-4', 'col-xl-3', 'cardAltura');
             cardItem.innerHTML = `
             <div class="card">
             <h1 class="nombrePokemon">${item.name.charAt(0).toUpperCase() + item.name.slice(1)}</h1>
@@ -131,7 +131,7 @@ const search = async () => {
             resultados.innerHTML = '';
             pokemon.map((item) => {
                 const cardItem = document.createElement('div');
-                cardItem.classList.add('col-12', 'col-md-6', 'col-lg-4', 'col-xl-3');
+                cardItem.classList.add('col-12', 'col-md-6', 'col-lg-4', 'col-xl-3', 'cardAltura');
                 cardItem.innerHTML = `
                 <div class="card">
                 <h1 class="nombrePokemon">${item.name.charAt(0).toUpperCase() + item.name.slice(1)}</h1>

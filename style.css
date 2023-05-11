@@ -19,7 +19,6 @@ nav ul {
 nav li {
     margin: 0 20px;
     margin-bottom: 10px;
-    font-family: 'PokemonSolid', sans-serif;
 }
 
 nav a {
@@ -27,11 +26,11 @@ nav a {
     text-decoration: none;
     font-weight: bold;
     font-size: 16px;
+    font-family: 'PokemonSolid', sans-serif;
 }
 
 nav a:hover {
     color: rgb(0, 119, 255);
-    -webkit-text-stroke: 0.05em darkred;
 }
 
 .cursor-personalizado {
@@ -87,7 +86,7 @@ body {
 
 .nombrePokemon {
     -webkit-text-stroke: 1.5px rgb(0, 119, 255);
-    padding-top: 1%;
+    padding: 4%;
 }
 
 .imgTipo {
@@ -224,4 +223,24 @@ body {
 /* Clase que muestra el gif */
 .mostrar {
     display: block !important;
+}
+
+.cardAltura {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+}
+
+.cardMovimientos {
+    background-color: black;
+    color: gold;
+    font-family: 'PokemonSolid', sans-serif;
+    border: 1px solid gold;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px gold;
+    margin: 20px;
+    padding-bottom: 15px;
+    width: 90%;
+    letter-spacing: 0.1em;
+    text-align: center;
 }
