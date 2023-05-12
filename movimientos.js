@@ -68,8 +68,8 @@ obtenerMovimientos().then((movimiento) => {
         const nombre = nombreEspanol || item.names.find(name => name.language.name === 'en')?.name || '';   
 
         if (item.damage_class.name == "physical") {
-            if (item.power == null) {
-                if (item.accuracy == null) {
+            if (!item.power) {
+                if (!item.accuracy) {
                     const cardItem = document.createElement('div');
                     cardItem.classList.add('col-12', 'col-md-6', 'col-lg-4', 'col-xl-3', 'cardAltura');
                     cardItem.innerHTML = `
@@ -112,8 +112,8 @@ obtenerMovimientos().then((movimiento) => {
             }
         }
         if (item.damage_class.name == "special") {
-            if (item.power == null) {
-                if (item.accuracy == null) {
+            if (!item.power) {
+                if (!item.accuracy) {
                     const cardItem = document.createElement('div');
                     cardItem.classList.add('col-12', 'col-md-6', 'col-lg-4', 'col-xl-3', 'cardAltura');
                     cardItem.innerHTML = `
@@ -156,7 +156,7 @@ obtenerMovimientos().then((movimiento) => {
             }
         }
         if (item.damage_class.name == "status") {
-            if (item.accuracy == null) {
+            if (!item.accuracy) {
                 const cardItem = document.createElement('div');
                 cardItem.classList.add('col-12', 'col-md-6', 'col-lg-4', 'col-xl-3', 'cardAltura');
                 cardItem.innerHTML = `
