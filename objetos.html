@@ -21,22 +21,28 @@
             <div class="col-sm"><a href="index.html"><img class="logoPokemon py-3 cursor-personalizado"
                         src="img/logo.png" alt="logo"></a></div>
             <div class="col-sm">
-                <ul>
-                    <li><a class="cursor-personalizado" href="movimientos.html">Movimientos</a></li><!--https://pokeapi.co/api/v2/move/{id or name}/-->
-                    <li><a class="cursor-personalizado" href="regiones.html">Regiones</a></li><!--https://pokeapi.co/api/v2/region/{id or name}/-->
-                    <li><a class="cursor-personalizado" href="objetos.html">Objetos</a></li><!--https://pokeapi.co/api/v2/item/{id or name}/-->
-                    <li><a class="cursor-personalizado" href="juegos.html">Juegos</a></li><!--https://pokeapi.co/api/v2/version/{id or name}/-->
-                </ul>
+                <a class="cursor-personalizado" href="movimientos.html">Movimientos</a></li>
+                <!--https://pokeapi.co/api/v2/move/{id or name}/-->
             </div>
             <div class="col-sm">
-                <form><input type="text" id="buscador" placeholder="Buscar pokemon..." onkeyup="search()"
-                        class="mb-2 cursor-personalizado"></form>
+                <a class="cursor-personalizado" href="regiones.html">Regiones</a></li>
+                <!--https://pokeapi.co/api/v2/region/{id or name}/-->
             </div>
+            <div class="col-sm">
+                <a class="cursor-personalizado" href="objetos.html">Objetos</a></li>
+                <!--https://pokeapi.co/api/v2/item/{id or name}/-->
+            </div>
+            <div class="col-sm">
+                <a class="cursor-personalizado" href="juegos.html">Juegos</a></li>
+                <!--https://pokeapi.co/api/v2/version/{id or name}/-->
+            </div>
+        </div>
         </div>
     </nav>
     <!--Div que muestra los resultados de cada página (ver JS)-->
     <div class="container text-center">
         <div id="pantallaCarga" class="my-5 ocultar"><img src="fonts/pantallaCarga.gif" alt="Cargando..."></div>
+        <div id="resultados"></div>
     </div>
 
     <script src="objetos.js"></script>

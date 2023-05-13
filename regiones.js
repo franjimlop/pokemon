@@ -33,7 +33,7 @@ const url = 'https://pokeapi.co/api/v2/';
 async function obtenerRegiones() {
     mostrarCarga();
     // Hacemos una solicitud para obtener la cantidad total de movimientos
-    const response = await fetch(`${url}region/?limit=920&offset=0`);
+    const response = await fetch(`${url}region/?limit=10&offset=0`);
     const data = await response.json();
 
     // Hacemos una solicitud para cada página y combinamos los resultados
