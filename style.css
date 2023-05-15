@@ -274,4 +274,8 @@ hr {
     margin: 0 auto;
     border-color: gold;
     border-width: 1px;
-}  
+}
+
+footer {
+    background-color: gold;
+}
