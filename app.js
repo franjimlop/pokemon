@@ -69,14 +69,13 @@ obtenerPokemon().then((pokemon) => {
         cardItem.classList.add('col-12', 'col-md-6', 'col-lg-4', 'col-xl-3', 'cardAltura');
         cardItem.innerHTML = `
         <div class="card">
-        <h1 class="nombrePokemon">${item.name.charAt(0).toUpperCase() + item.name.slice(1)}</h1>
-        <p class="numPokedex">${item.id}</p>
-        <img src="${item.sprites.front_default || 'img/logo.png'}">
-        <p>${item.types.map(type => `<img class="imgTipo" src="${tipoImagenes[type.type.name]}" alt="${type.type.name}">`).join(" ")}</p>
-        <p>Altura: ${item.height / 10} m</p>
-        <p>Peso: ${item.weight} kg</p>
+            <h1 class="nombrePokemon">${item.name.charAt(0).toUpperCase() + item.name.slice(1)}</h1>
+            <p class="numPokedex">${item.id}</p>
+            <img src="${item.sprites.front_default || 'img/logo.png'}">
+            <p>${item.types.map(type => `<img class="imgTipo" src="${tipoImagenes[type.type.name]}">`).join(" ")}</p>
+            <p>Altura: ${item.height / 10} m</p>
+            <p>Peso: ${item.weight} kg</p>
         </div>`;
-        //puedo añadir abilities y moves y poner todos los sprites
         resultados.appendChild(cardItem);
     });
     ocultarCarga();
@@ -88,64 +87,60 @@ const search = async () => {
     // Obtener el valor del input de búsqueda
     const searchValue = document.querySelector('#buscador').value;
     mostrarCarga();
-    // Comprobar si se ha introducido algún valor
-    if (searchValue) {
-        // Variable que guarda la url de la pokeAPI para buscar pokemon
-        const url = `https://pokeapi.co/api/v2/pokemon/?limit=1281&offset=0`;
 
-        // Hacemos una solicitud para obtener la lista completa de pokemon
-        const response = await fetch(url);
-        const data = await response.json();
+    // Variable que guarda la url de la pokeAPI para buscar pokemon
+    const url = `https://pokeapi.co/api/v2/pokemon/?limit=1281&offset=0`;
 
-        // Filtramos la lista de pokemon para obtener solo aquellos cuyo nombre contiene la cadena de búsqueda
-        const filteredPokemon = data.results.filter((pokemon) => pokemon.name.includes(searchValue.toLowerCase()));
+    // Hacemos una solicitud para obtener la lista completa de pokemon
+    const response = await fetch(url);
+    const data = await response.json();
 
-        // Hacemos una solicitud para cada Pokemon para obtener su información completa
-        const pokemon = await Promise.all(filteredPokemon.map(async (pokemon) => {
-            const response = await fetch(pokemon.url);
-            return response.json();
-        }));
+    // Filtramos la lista de pokemon para obtener solo aquellos cuyo nombre contiene la cadena de búsqueda
+    const filteredPokemon = data.results.filter((pokemon) => pokemon.name.includes(searchValue.toLowerCase()));
 
-        const resultados = document.querySelector("#resultados");
-        resultados.innerHTML = '';
+    // Obtener el tipo seleccionado
+    const tipoSeleccionado = obtenerTipoSeleccionado();
+
+    const resultados = document.querySelector("#resultados");
+    resultados.innerHTML = '';
+
+    Promise.all(filteredPokemon.map(async (pokemon) => {
+        const response = await fetch(pokemon.url);
+        return response.json();
+    })).then((pokemon) => {
+        // Filtrar por tipo si hay un tipo seleccionado
+        if (tipoSeleccionado) {
+            pokemon = pokemon.filter((item) =>
+                item.types.some((type) => type.type.name === tipoSeleccionado)
+            );
+        }
 
         // Creamos una tarjeta para cada Pokemon
         pokemon.map((item) => {
             const cardItem = document.createElement('div');
             cardItem.classList.add('col-12', 'col-md-6', 'col-lg-4', 'col-xl-3', 'cardAltura');
             cardItem.innerHTML = `
-            <div class="card">
-            <h1 class="nombrePokemon">${item.name.charAt(0).toUpperCase() + item.name.slice(1)}</h1>
-            <p class="numPokedex">${item.id}</p>
-            <img src="${item.sprites.front_default || 'img/logo.png'}">
-            <p>${item.types.map(type => `<img class="imgTipo" src="${tipoImagenes[type.type.name]}" alt="${type.type.name}">`).join(" ")}</p>
-            <p>Altura: ${item.height / 10} m</p>
-            <p>Peso: ${item.weight} kg</p>
-            </div>`;
+                        <div class="card">
+                            <h1 class="nombrePokemon">${item.name.charAt(0).toUpperCase() + item.name.slice(1)}</h1>
+                            <p class="numPokedex">${item.id}</p>
+                            <img src="${item.sprites.front_default || 'img/logo.png'}">
+                            <p>${item.types.map(type => `<img class="imgTipo" src="${tipoImagenes[type.type.name]}" alt="${type.type.name}">`).join(" ")}</p>
+                            <p>Altura: ${item.height / 10} m</p>
+                            <p>Peso: ${item.weight} kg</p>
+                        </div>`;
             resultados.appendChild(cardItem);
         });
-    } else if (searchValue === '') {
-        // Si no se ha introducido ningún valor, mostrar todos los personajes de la página actual
-        obtenerPokemon().then((pokemon) => {
-            const resultados = document.querySelector("#resultados");
-            resultados.innerHTML = '';
-            pokemon.map((item) => {
-                const cardItem = document.createElement('div');
-                cardItem.classList.add('col-12', 'col-md-6', 'col-lg-4', 'col-xl-3', 'cardAltura');
-                cardItem.innerHTML = `
-                <div class="card">
-                <h1 class="nombrePokemon">${item.name.charAt(0).toUpperCase() + item.name.slice(1)}</h1>
-                <p class="numPokedex">${item.id}</p>
-                <img src="${item.sprites.front_default || 'img/logo.png'}">
-                <p>${item.types.map(type => `<img class="imgTipo" src="${tipoImagenes[type.type.name]}" alt="${type.type.name}">`).join(" ")}</p>
-                <p>Altura: ${item.height / 10} m</p>
-                <p>Peso: ${item.weight} kg</p>
-                </div>`;
-                resultados.appendChild(cardItem);
-            });
-        });
-    }
+    })
     ocultarCarga();
+};
+
+function obtenerTipoSeleccionado() {
+    const botonActivo = document.querySelector("#filtroTipo button.active");
+    if (botonActivo) {
+        const tipo = botonActivo.id.replace("btn-", "");
+        return tipo;
+    }
+    return null;
 };
 
 async function obtenerPokemonPorTipo() {
@@ -187,35 +182,40 @@ obtenerPokemonPorTipo().then((tipos) => {
 
 function filtrarPorTipo(tipo) {
     mostrarCarga();
-    obtenerPokemon().then((pokemon) => {
-        const resultados = document.querySelector("#resultados");
-        resultados.innerHTML = "";
 
-        // Filtrar los Pokémon por tipo
-        const pokemonFiltrado = pokemon.filter((item) =>
-            item.types.some((type) => type.type.name === tipo)
-        );
+    if (document.querySelector('#buscador').value) {
+        search();
+    } else {
+        obtenerPokemon().then((pokemon) => {
+            const resultados = document.querySelector("#resultados");
+            resultados.innerHTML = "";
 
-        // Mostrar los Pokémon filtrados en la pantalla
-        pokemonFiltrado.map((item) => {
-            const cardItem = document.createElement("div");
-            cardItem.classList.add(
-                "col-12",
-                "col-md-6",
-                "col-lg-4",
-                "col-xl-3"
+            // Filtrar los Pokémon por tipo
+            const pokemonFiltrado = pokemon.filter((item) =>
+                item.types.some((type) => type.type.name === tipo)
             );
-            cardItem.innerHTML = `
-            <div class="card">
-            <h1 class="nombrePokemon">${item.name.charAt(0).toUpperCase() + item.name.slice(1)}</h1>
-            <p class="numPokedex">${item.id}</p>
-            <img src="${item.sprites.front_default || "img/logo.png"}">
-            <p>${item.types.map((type) => `<img class="imgTipo" src="${tipoImagenes[type.type.name]}" alt="${type.type.name}">`).join(" ")}</p>
-            <p>Altura: ${item.height / 10} m</p>
-            <p>Peso: ${item.weight} kg</p>
-            </div>`;
-            resultados.appendChild(cardItem);
+
+            // Mostrar los Pokémon filtrados en la pantalla
+            pokemonFiltrado.map((item) => {
+                const cardItem = document.createElement("div");
+                cardItem.classList.add(
+                    "col-12",
+                    "col-md-6",
+                    "col-lg-4",
+                    "col-xl-3"
+                );
+                cardItem.innerHTML = `
+                <div class="card">
+                <h1 class="nombrePokemon">${item.name.charAt(0).toUpperCase() + item.name.slice(1)}</h1>
+                <p class="numPokedex">${item.id}</p>
+                <img src="${item.sprites.front_default || "img/logo.png"}">
+                <p>${item.types.map((type) => `<img class="imgTipo" src="${tipoImagenes[type.type.name]}" alt="${type.type.name}">`).join(" ")}</p>
+                <p>Altura: ${item.height / 10} m</p>
+                <p>Peso: ${item.weight} kg</p>
+                </div>`;
+                resultados.appendChild(cardItem);
+            });
+            ocultarCarga();
         });
-        ocultarCarga();
-    });
+    }
 };
