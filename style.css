@@ -279,3 +279,22 @@ hr {
 footer {
     background-color: gold;
 }
+
+.btn-cargar {
+    background-color: gold;
+    color: rgb(0, 119, 255);
+    border-color: rgb(0, 119, 255);
+    padding-top: 0.5em;
+    padding-bottom: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
+    border-radius: 5px;
+    font-family: 'PokemonSolid', sans-serif;
+    font-size: 1em;
+}
+
+.btn-cargar:hover {
+    background-color: rgb(0, 119, 255);
+    color: gold;
+    border-color: gold;
+}

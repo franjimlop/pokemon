@@ -13,6 +13,11 @@ function ocultarCarga() {
     pantallaCarga.classList.add('ocultar');
 }
 
+const botonCargarMas = document.getElementById('botonCargarMas');
+botonCargarMas.addEventListener('click', cargarMasElementos);
+//pokemon que quiero cargar desde el principio
+var objetosCargados = 20;
+
 // Constante que guarda la URL base de la PokeAPI
 const url = 'https://pokeapi.co/api/v2/';
 
@@ -40,7 +45,8 @@ obtenerObjetos().then((objeto) => {
     resultados.innerHTML = '';
 
     // Creamos una tarjeta para cada Movimiento
-    objeto.map((item) => {
+    for (let i = 0; i < objetosCargados; i++) {
+        const item = objeto[i];
         const nombreEspanol = item.names.find(name => name.language.name === 'es')?.name || '';
         const nombre = nombreEspanol || item.names.find(name => name.language.name === 'en')?.name || '';
         let descripcion = "";
@@ -69,7 +75,51 @@ obtenerObjetos().then((objeto) => {
             </div>
             </div>`;
         resultados.appendChild(cardItem);
-    });
+    };
     ocultarCarga();
     console.log(objeto);
 });
+
+function cargarMasElementos() {
+    objetosCargados += 20;
+
+    obtenerObjetos().then((objeto) => {
+        const resultados = document.querySelector("#resultados");
+        resultados.innerHTML = '';
+    
+        // Creamos una tarjeta para cada Movimiento
+        for (let i = 0; i < objetosCargados; i++) {
+            const item = objeto[i];
+            const nombreEspanol = item.names.find(name => name.language.name === 'es')?.name || '';
+            const nombre = nombreEspanol || item.names.find(name => name.language.name === 'en')?.name || '';
+            let descripcion = "";
+            for (let i = 0; i < item.flavor_text_entries.length; i++) {
+                if (item.flavor_text_entries[i].language.name === "es") {
+                    descripcion = item.flavor_text_entries[i].text;
+                    break;
+                }
+            }
+    
+            const cardItem = document.createElement('div');
+            cardItem.classList.add('col-12', 'col-md-6', 'cardAltura');
+            cardItem.innerHTML = `
+                <div class="cardMovimientos">
+                <div class="row">
+                    <div class="col-9 p-3">
+                        <h1 class="nombrePokemon mb-4">${nombre.charAt(0).toUpperCase() + nombre.slice(1)}</h1>
+                    </div>
+                    <div class="col-3 p-3 img-container">
+                        <img src="${item.sprites.default}">
+                    </div>
+                </div>
+                <hr>
+                <div class="p-4 text-center">
+                    <p>${descripcion}</p>
+                </div>
+                </div>`;
+            resultados.appendChild(cardItem);
+        };
+        ocultarCarga();
+        console.log(objeto);
+    });
+}

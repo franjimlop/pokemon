@@ -13,6 +13,11 @@ function ocultarCarga() {
     pantallaCarga.classList.add('ocultar');
 }
 
+const botonCargarMas = document.getElementById('botonCargarMas');
+botonCargarMas.addEventListener('click', cargarMasElementos);
+//pokemon que quiero cargar desde el principio
+var pokemonCargados = 30;
+
 // Constante que guarda la URL base de la PokeAPI
 const url = 'https://pokeapi.co/api/v2/';
 
@@ -64,20 +69,21 @@ obtenerPokemon().then((pokemon) => {
     resultados.innerHTML = '';
 
     // Creamos una tarjeta para cada Pokemon
-    pokemon.map((item) => {
+    for (let i = 0; i < pokemonCargados; i++) {
+        const item = pokemon[i];
         const cardItem = document.createElement('div');
         cardItem.classList.add('col-12', 'col-md-6', 'col-lg-4', 'col-xl-3', 'cardAltura');
         cardItem.innerHTML = `
-        <div class="card">
-            <h1 class="nombrePokemon">${item.name.charAt(0).toUpperCase() + item.name.slice(1)}</h1>
-            <p class="numPokedex">${item.id}</p>
-            <img src="${item.sprites.front_default || 'img/logo.png'}">
-            <p>${item.types.map(type => `<img class="imgTipo" src="${tipoImagenes[type.type.name]}">`).join(" ")}</p>
-            <p>Altura: ${item.height / 10} m</p>
-            <p>Peso: ${item.weight} kg</p>
-        </div>`;
+            <div class="card">
+                <h1 class="nombrePokemon">${item.name.charAt(0).toUpperCase() + item.name.slice(1)}</h1>
+                <p class="numPokedex">${item.id}</p>
+                <img src="${item.sprites.front_default || 'img/logo.png'}">
+                <p>${item.types.map(type => `<img class="imgTipo" src="${tipoImagenes[type.type.name]}">`).join(" ")}</p>
+                <p>Altura: ${item.height / 10} m</p>
+                <p>Peso: ${item.weight} kg</p>
+            </div>`;
         resultados.appendChild(cardItem);
-    });
+    }
     ocultarCarga();
     console.log(pokemon);
 });
@@ -219,3 +225,33 @@ function filtrarPorTipo(tipo) {
         });
     }
 };
+
+function cargarMasElementos() {
+    // Incrementa el número de elementos cargados
+    pokemonCargados += 30;
+
+    // Vuelve a llamar a la función obtenerPokemon() para obtener los nuevos elementos
+    obtenerPokemon().then((pokemon) => {
+        const resultados = document.querySelector("#resultados");
+        resultados.innerHTML = '';
+    
+        // Creamos una tarjeta para cada Pokemon
+        for (let i = 0; i < pokemonCargados; i++) {
+            const item = pokemon[i];
+            const cardItem = document.createElement('div');
+            cardItem.classList.add('col-12', 'col-md-6', 'col-lg-4', 'col-xl-3', 'cardAltura');
+            cardItem.innerHTML = `
+                <div class="card">
+                    <h1 class="nombrePokemon">${item.name.charAt(0).toUpperCase() + item.name.slice(1)}</h1>
+                    <p class="numPokedex">${item.id}</p>
+                    <img src="${item.sprites.front_default || 'img/logo.png'}">
+                    <p>${item.types.map(type => `<img class="imgTipo" src="${tipoImagenes[type.type.name]}">`).join(" ")}</p>
+                    <p>Altura: ${item.height / 10} m</p>
+                    <p>Peso: ${item.weight} kg</p>
+                </div>`;
+            resultados.appendChild(cardItem);
+        }
+        ocultarCarga();
+        console.log(pokemon);
+    });
+}
