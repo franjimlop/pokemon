@@ -71,7 +71,7 @@ obtenerMovimientos().then((movimiento) => {
     for (let i = 0; i < movimientosCargados; i++) {
         const item = movimiento[i];
         const nombreEspanol = item.names.find(name => name.language.name === 'es')?.name || '';
-        const nombre = nombreEspanol || item.names.find(name => name.language.name === 'en')?.name || '';   
+        const nombre = nombreEspanol || item.names.find(name => name.language.name === 'en')?.name || '';
 
         if (item.damage_class.name == "physical") {
             if (!item.power) {
@@ -199,13 +199,13 @@ function cargarMasElementos() {
     obtenerMovimientos().then((movimiento) => {
         const resultados = document.querySelector("#resultados");
         resultados.innerHTML = '';
-    
+
         // Creamos una tarjeta para cada Movimiento
         for (let i = 0; i < movimientosCargados; i++) {
             const item = movimiento[i];
             const nombreEspanol = item.names.find(name => name.language.name === 'es')?.name || '';
-            const nombre = nombreEspanol || item.names.find(name => name.language.name === 'en')?.name || '';   
-    
+            const nombre = nombreEspanol || item.names.find(name => name.language.name === 'en')?.name || '';
+
             if (item.damage_class.name == "physical") {
                 if (!item.power) {
                     if (!item.accuracy) {
@@ -325,4 +325,4 @@ function cargarMasElementos() {
         ocultarCarga();
         console.log(movimiento);
     });
-}
+};

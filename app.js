@@ -5,18 +5,18 @@ const pantallaCarga = document.getElementById('pantallaCarga');
 function mostrarCarga() {
     pantallaCarga.classList.remove('ocultar');
     pantallaCarga.classList.add('mostrar');
-}
+};
 
 // Función para ocultar la pantalla de carga
 function ocultarCarga() {
     pantallaCarga.classList.remove('mostrar');
     pantallaCarga.classList.add('ocultar');
-}
+};
 
 const botonCargarMas = document.getElementById('botonCargarMas');
 botonCargarMas.addEventListener('click', cargarMasElementos);
 //pokemon que quiero cargar desde el principio
-var pokemonCargados = 30;
+var pokemonCargados = 40;
 
 // Constante que guarda la URL base de la PokeAPI
 const url = 'https://pokeapi.co/api/v2/';
@@ -39,7 +39,7 @@ async function obtenerPokemon() {
     }));
 
     return pokemon;
-}
+};
 
 // Objeto que uso en obtenerPokemon() para enlazar los nombres de los tipos a las rutas de sus imágenes
 const tipoImagenes = {
@@ -169,7 +169,7 @@ obtenerPokemonPorTipo().then((tipos) => {
             const botonItem = document.createElement('div');
             botonItem.classList.add('col-4', 'col-xl-2', 'd-inline-block', 'my-2');
             botonItem.innerHTML = `
-            <button id="btn-${boton.name}" class="bg-${boton.name} cursor-personalizado">${boton.name.charAt(0).toUpperCase() + boton.name.slice(1)}</button>`;
+            <button id="btn-${boton.name}" class="bg-${boton.name} cursor-personalizado boton-tipo">${boton.name.charAt(0).toUpperCase() + boton.name.slice(1)}</button>`;
             resultados.appendChild(botonItem);
 
             const btnTipo = document.querySelector(`#btn-${boton.name}`);
@@ -204,12 +204,7 @@ function filtrarPorTipo(tipo) {
             // Mostrar los Pokémon filtrados en la pantalla
             pokemonFiltrado.map((item) => {
                 const cardItem = document.createElement("div");
-                cardItem.classList.add(
-                    "col-12",
-                    "col-md-6",
-                    "col-lg-4",
-                    "col-xl-3"
-                );
+                cardItem.classList.add("col-12", "col-md-6", "col-lg-4", 'col-xl-3', 'cardAltura');
                 cardItem.innerHTML = `
                 <div class="card">
                 <h1 class="nombrePokemon">${item.name.charAt(0).toUpperCase() + item.name.slice(1)}</h1>
@@ -228,7 +223,7 @@ function filtrarPorTipo(tipo) {
 
 function cargarMasElementos() {
     // Incrementa el número de elementos cargados
-    pokemonCargados += 30;
+    pokemonCargados += 40;
 
     // Vuelve a llamar a la función obtenerPokemon() para obtener los nuevos elementos
     obtenerPokemon().then((pokemon) => {
@@ -254,4 +249,4 @@ function cargarMasElementos() {
         ocultarCarga();
         console.log(pokemon);
     });
-}
+};

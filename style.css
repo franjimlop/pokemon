@@ -90,8 +90,8 @@ body {
 }
 
 .imgTipo {
-    width: 66.67px;
-    height: 80px;
+    width: 5em;
+    height: 6em;
     margin-left: 3%;
     margin-right: 3%;
 }
@@ -297,4 +297,24 @@ footer {
     background-color: rgb(0, 119, 255);
     color: gold;
     border-color: gold;
+}
+
+.buscador-personalizado {
+    background-color: darkred;
+    border: 1px solid black;
+    padding: 10px;
+    color: gold;
+    border-radius: 10px;
+    font-family: 'PokemonSolid', sans-serif;
+}
+.buscador-personalizado::placeholder {
+    color: gold;
+}
+
+.boton-tipo {
+    border-radius: 10px;
+    border: 1px solid black;
+}
+.boton-tipo:hover {
+    border: 1px solid gold;
 }
