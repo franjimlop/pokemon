@@ -307,6 +307,7 @@ footer {
     border-radius: 10px;
     font-family: 'PokemonSolid', sans-serif;
 }
+
 .buscador-personalizado::placeholder {
     color: gold;
 }
@@ -315,6 +316,70 @@ footer {
     border-radius: 10px;
     border: 1px solid black;
 }
+
 .boton-tipo:hover {
     border: 1px solid gold;
+}
+
+.img-region {
+    border: 2px solid gold;
+}
+
+.lista-juegos {
+    text-align: start;
+    padding-left: 25%;
+    list-style: none;
+}
+
+.lista-juegos li {
+    position: relative;
+    padding-left: 5%;
+}
+
+.lista-juegos li:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+}
+
+.cardRegiones {
+    background-color: #8B008B;
+    color: gold;
+    font-family: 'PokemonSolid', sans-serif;
+    border: 1px solid gold;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px gold;
+    margin: 20px;
+    padding-bottom: 15px;
+    width: 90%;
+    letter-spacing: 0.1em;
+    text-align: center;
+}
+
+.cardObjetos {
+    background-color: #800020;
+    color: gold;
+    font-family: 'PokemonSolid', sans-serif;
+    border: 1px solid gold;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px gold;
+    margin: 20px;
+    padding-bottom: 15px;
+    width: 90%;
+    letter-spacing: 0.1em;
+    text-align: center;
+}
+
+.cardJuegos {
+    background-color: #6A0DAD;
+    color: gold;
+    font-family: 'PokemonSolid', sans-serif;
+    border: 1px solid gold;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px gold;
+    margin: 20px;
+    padding-bottom: 15px;
+    width: 90%;
+    letter-spacing: 0.1em;
+    text-align: center;
 }

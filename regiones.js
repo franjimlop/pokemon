@@ -55,36 +55,36 @@ obtenerRegiones().then((region) => {
     // Creamos una tarjeta para cada Movimiento
     region.map((item) => {
         const cardItem = document.createElement('div');
-        cardItem.classList.add('col-12', 'col-md-6', 'cardAltura');
+        cardItem.classList.add('col-12', 'col-lg-6', 'cardAltura');
         if (item.main_generation) {
             cardItem.innerHTML = `
-                <div class="cardMovimientos">
-                <h1 class="nombrePokemon mb-4">${item.name.charAt(0).toUpperCase() + item.name.slice(1)}</h1>
-                <div class="row">
-                    <div class="col-12 col-xl-6 p-3">
-                        <img src="${fotoRegion[item.name]}" alt="${item.name}">
-                        <h4 class="my-3">Generación: ${item.main_generation.name.slice(11).toUpperCase()}</h4>
+                <div class="cardRegiones">
+                    <h1 class="nombrePokemon mb-3">${item.name.charAt(0).toUpperCase() + item.name.slice(1)}</h1>
+                    <h5>Generación: ${item.main_generation.name.slice(11).toUpperCase()}</h5>
+                    <div class="text-center p-3">
+                        <img class="img-region" src="${fotoRegion[item.name]}" alt="${item.name}">
                     </div>
-                    <div class="col-12 col-xl-6 p-3">
+                    <div class="p-3">
                         <p>Juegos:</p>
-                        ${item.version_groups.map((version) => `<p>${version.name}</p>`).join('')}
+                        <ul class="lista-juegos">
+                            ${item.version_groups.map((version) => `<li>${capitalizeWords(version.name.replace(/-/g, ' '))}</li>`).join('')}
+                        </ul>
                     </div>
-                </div>
                 </div>`;
             resultados.appendChild(cardItem);
         } else {
             cardItem.innerHTML = `
-            <div class="cardMovimientos">
-            <h1 class="nombrePokemon mb-4">${item.name.charAt(0).toUpperCase() + item.name.slice(1)}</h1>
-            <div class="row">
-                <div class="col-12 col-xl-6 p-3">
-                    <img src="${fotoRegion[item.name]}" alt="${item.name}">
+            <div class="cardRegiones">
+                <h1 class="nombrePokemon mb-3">${item.name.charAt(0).toUpperCase() + item.name.slice(1)}</h1>
+                <div class="text-center p-3">
+                    <img class="img-region" src="${fotoRegion[item.name]}" alt="${item.name}">
                 </div>
-                <div class="col-12 col-xl-6 p-3">
+                <div class="p-3">
                     <p>Juegos:</p>
-                    ${item.version_groups.map((version) => `<p>${version.name}</p>`).join('')}
+                    <ul class="lista-juegos">
+                        ${item.version_groups.map((version) => `<li>${capitalizeWords(version.name.replace(/-/g, ' '))}</li>`).join('')}
+                    </ul>
                 </div>
-            </div>
             </div>`;
             resultados.appendChild(cardItem);
         }
@@ -92,3 +92,7 @@ obtenerRegiones().then((region) => {
     ocultarCarga();
     console.log(region);
 });
+
+function capitalizeWords(str) {
+    return str.replace(/\b\w/g, (match) => match.toUpperCase());
+}

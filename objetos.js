@@ -60,7 +60,7 @@ obtenerObjetos().then((objeto) => {
         const cardItem = document.createElement('div');
         cardItem.classList.add('col-12', 'col-md-6', 'cardAltura');
         cardItem.innerHTML = `
-            <div class="cardMovimientos">
+            <div class="cardObjetos">
             <div class="row">
                 <div class="col-9 p-3">
                     <h1 class="nombrePokemon mb-4">${nombre.charAt(0).toUpperCase() + nombre.slice(1)}</h1>
@@ -103,7 +103,7 @@ function cargarMasElementos() {
             const cardItem = document.createElement('div');
             cardItem.classList.add('col-12', 'col-md-6', 'cardAltura');
             cardItem.innerHTML = `
-                <div class="cardMovimientos">
+                <div class="cardObjetos">
                 <div class="row">
                     <div class="col-9 p-3">
                         <h1 class="nombrePokemon mb-4">${nombre.charAt(0).toUpperCase() + nombre.slice(1)}</h1>

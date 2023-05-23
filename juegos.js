@@ -90,10 +90,9 @@ obtenerJuegos().then((juego) => {
         const cardItem = document.createElement('div');
         cardItem.classList.add('col-12', 'col-md-6', 'col-lg-4', 'cardAltura');
         cardItem.innerHTML = `
-            <div class="cardMovimientos">
-                <h1 class="nombrePokemon mb-4">Pokémon ${nombre}</h1>
-                <hr>
-                <div class="p-3 img-juego">
+            <div class="cardJuegos">
+                <h1 class="nombrePokemon">Pokémon ${nombre}</h1>
+                <div class="p-5 img-juego">
                     <img src="${juegoImagenes[item.name]}">
                 </div>
             </div>`;

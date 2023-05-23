@@ -15,6 +15,17 @@ function ocultarCarga() {
 
 const botonCargarMas = document.getElementById('botonCargarMas');
 botonCargarMas.addEventListener('click', cargarMasElementos);
+
+// Función para ocultar el botón "Cargar más"
+function ocultarBotonCargarMas() {
+    botonCargarMas.style.display = 'none';
+}
+
+// Función para mostrar el botón "Cargar más"
+function mostrarBotonCargarMas() {
+    botonCargarMas.style.display = 'block';
+}
+
 //pokemon que quiero cargar desde el principio
 var pokemonCargados = 40;
 
@@ -84,6 +95,9 @@ obtenerPokemon().then((pokemon) => {
             </div>`;
         resultados.appendChild(cardItem);
     }
+    if (pokemonCargados >= pokemon.length) {
+        ocultarBotonCargarMas();
+    }
     ocultarCarga();
     console.log(pokemon);
 });
@@ -120,23 +134,27 @@ const search = async () => {
                 item.types.some((type) => type.type.name === tipoSeleccionado)
             );
         }
-
-        // Creamos una tarjeta para cada Pokemon
-        pokemon.map((item) => {
-            const cardItem = document.createElement('div');
-            cardItem.classList.add('col-12', 'col-md-6', 'col-lg-4', 'col-xl-3', 'cardAltura');
-            cardItem.innerHTML = `
-                        <div class="card">
-                            <h1 class="nombrePokemon">${item.name.charAt(0).toUpperCase() + item.name.slice(1)}</h1>
-                            <p class="numPokedex">${item.id}</p>
-                            <img src="${item.sprites.front_default || 'img/logo.png'}">
-                            <p>${item.types.map(type => `<img class="imgTipo" src="${tipoImagenes[type.type.name]}" alt="${type.type.name}">`).join(" ")}</p>
-                            <p>Altura: ${item.height / 10} m</p>
-                            <p>Peso: ${item.weight} kg</p>
-                        </div>`;
-            resultados.appendChild(cardItem);
-        });
+        if (searchValue == "") {
+            obtenerPokemon;
+        } else {
+            // Creamos una tarjeta para cada Pokemon
+            pokemon.map((item) => {
+                const cardItem = document.createElement('div');
+                cardItem.classList.add('col-12', 'col-md-6', 'col-lg-4', 'col-xl-3', 'cardAltura');
+                cardItem.innerHTML = `
+                            <div class="card">
+                                <h1 class="nombrePokemon">${item.name.charAt(0).toUpperCase() + item.name.slice(1)}</h1>
+                                <p class="numPokedex">${item.id}</p>
+                                <img src="${item.sprites.front_default || 'img/logo.png'}">
+                                <p>${item.types.map(type => `<img class="imgTipo" src="${tipoImagenes[type.type.name]}" alt="${type.type.name}">`).join(" ")}</p>
+                                <p>Altura: ${item.height / 10} m</p>
+                                <p>Peso: ${item.weight} kg</p>
+                            </div>`;
+                resultados.appendChild(cardItem);
+            });
+        }
     })
+    ocultarBotonCargarMas();
     ocultarCarga();
 };
 
@@ -216,6 +234,7 @@ function filtrarPorTipo(tipo) {
                 </div>`;
                 resultados.appendChild(cardItem);
             });
+            ocultarBotonCargarMas();
             ocultarCarga();
         });
     }
@@ -245,6 +264,9 @@ function cargarMasElementos() {
                     <p>Peso: ${item.weight} kg</p>
                 </div>`;
             resultados.appendChild(cardItem);
+        }
+        if (pokemonCargados >= pokemon.length) {
+            ocultarBotonCargarMas();
         }
         ocultarCarga();
         console.log(pokemon);
