@@ -21,11 +21,6 @@ function ocultarBotonCargarMas() {
     botonCargarMas.style.display = 'none';
 }
 
-// Función para mostrar el botón "Cargar más"
-function mostrarBotonCargarMas() {
-    botonCargarMas.style.display = 'block';
-}
-
 //pokemon que quiero cargar desde el principio
 var pokemonCargados = 40;
 
